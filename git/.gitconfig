@@ -1,0 +1,20 @@
+[user]
+	name = Augustus Nguyen
+	email = theflash28012002@gmail.com
+[remote "origin"]
+	tagOpt = --no-tags
+[credential]
+	helper = store
+[core]
+	autocrlf = input
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
