@@ -1,0 +1,62 @@
+add_newline = false
+
+# =========================
+# MAIN PROMPT LAYOUT
+# =========================
+format = """
+$aws\
+$docker_context\
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$line_break\
+$character
+"""
+
+# =========================
+# DIRECTORY (WORK CONTEXT)
+# =========================
+[directory]
+style = "bold #89b4fa"
+truncate_to_repo = true
+truncation_length = 2
+
+# =========================
+# GIT (CODE HEALTH SIGNAL)
+# =========================
+[git_branch]
+symbol = " "
+style = "bold #cba6f7"
+
+[git_status]
+style = "bold #f38ba8"
+
+# =========================
+# CMD DURATION (DEBUG ONLY)
+# =========================
+[cmd_duration]
+min_time = 800
+format = "⏱ [$duration](bold #fab387) "
+
+# =========================
+# PROMPT SYMBOL (OPS STYLE)
+# =========================
+[character]
+success_symbol = "[❯](bold #a6e3a1)"
+error_symbol = "[❯](bold #f38ba8)"
+
+# =========================
+# CLOUD (AWS STYLE OPS)
+# =========================
+[aws]
+format = '☁️ [$profile](bold #f9e2af) '
+style = "bold #f9e2af"
+
+# =========================
+# DOCKER (CONTAINER SIGNAL)
+# =========================
+[docker_context]
+symbol = "🐳 "
+style = "bold #74c7ec"
+format = "[$symbol$context]($style) "
