@@ -11,6 +11,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH=$PATH:$HOME/go/bin
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # Secrets (not committed — set in ~/.zshenv.local or similar)
 # export ANTHROPIC_API_KEY="..."
