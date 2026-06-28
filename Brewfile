@@ -8,3 +8,8 @@ brew "minikube"
 brew "kind"
 brew "helm"
 brew "k9s"
+brew "argocd"
+
+# Infrastructure
+brew "terraform"
+brew "tenv"         # terraform version manager
