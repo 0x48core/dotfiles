@@ -16,3 +16,4 @@ brew "tenv"         # terraform version manager
 
 # Protobuf
 brew "bufbuild/buf/buf"
+brew "grpcurl"
