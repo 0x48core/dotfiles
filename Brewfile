@@ -13,3 +13,6 @@ brew "argocd"
 # Infrastructure
 brew "terraform"
 brew "tenv"         # terraform version manager
+
+# Protobuf
+brew "bufbuild/buf/buf"
