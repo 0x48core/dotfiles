@@ -13,6 +13,10 @@ brew "argocd"
 # Infrastructure
 brew "terraform"
 brew "tenv"         # terraform version manager
+brew "cloud-sql-proxy"
+
+# Google Cloud
+cask "google-cloud-sdk"
 
 # Protobuf
 brew "bufbuild/buf/buf"
