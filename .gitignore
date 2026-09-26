@@ -1,3 +1,4 @@
 .zshenv.local
 .env
 *.secret
+.idea
