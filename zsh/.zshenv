@@ -1,4 +1,7 @@
-. "$HOME/.cargo/env"
+# Load Rust/Cargo environment if available
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
 
 # rtk: ensure ~/.local/bin on PATH
 export RTK_TELEMETRY_DISABLED=1
