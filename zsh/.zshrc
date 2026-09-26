@@ -18,6 +18,7 @@ fi
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export GOPRIVATE=gitlab.ghn.vn/*
 
 # Initialize Starship if installed
 if command -v starship >/dev/null 2>&1; then
