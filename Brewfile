@@ -2,6 +2,9 @@ brew "libpq"
 brew "starship"
 brew "neovim"
 
+# Ruby (Jekyll)
+brew "ruby"
+
 # Kubernetes
 brew "kubectl"
 brew "minikube"
