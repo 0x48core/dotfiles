@@ -33,6 +33,14 @@ if [ -d "$_brew_prefix/opt/ruby/bin" ]; then
 fi
 unset _brew_prefix _ruby_gem_bins
 
+# Kubernetes
+if command -v kubectl >/dev/null 2>&1; then
+  alias k='kubectl'
+  (( $+functions[compdef] )) || { autoload -Uz compinit && compinit; }
+  source <(kubectl completion zsh)
+  compdef k=kubectl
+fi
+
 # Initialize Starship if installed
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"

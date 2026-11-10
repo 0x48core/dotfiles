@@ -9,3 +9,8 @@ case ":${PATH}:" in
   *":$HOME/.local/bin:"*) ;;
   *) export PATH="$HOME/.local/bin:${PATH}" ;;
 esac
+
+# Machine-local secrets (DIGITALOCEAN_TOKEN, API keys, ...), never committed
+if [ -f "$HOME/.zshenv.local" ]; then
+  source "$HOME/.zshenv.local"
+fi

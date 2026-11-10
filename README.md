@@ -33,6 +33,7 @@ Keep secrets out of this repo. Export them in `~/.zshenv.local` (not tracked):
 
 ```bash
 export ANTHROPIC_API_KEY="anthropic_api_key"
+export DIGITALOCEAN_TOKEN="dop_v1_..."      # terraform digitalocean provider
 ```
 
-Then source it at the end of `zsh/.zshenv`.
+`zsh/.zshenv` sources it automatically when present.

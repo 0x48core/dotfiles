@@ -2,6 +2,8 @@
 
 Terraform provisions infrastructure as code. `tenv` manages multiple Terraform versions.
 
+`tenv` provides the `terraform` command, so don't also `brew install terraform`: Homebrew core is frozen at 1.5.7 (pre-license change), too old for code that needs `>= 1.9`.
+
 ## Version management (tenv)
 
 ```bash
