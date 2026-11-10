@@ -17,15 +17,13 @@ fi
 
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-# Homebrew Ruby (ahead of macOS system Ruby 2.6) + its gem executables
-if [[ "$(uname -m)" == "arm64" ]]; then
-  _brew_prefix="/opt/homebrew"
-else
-  _brew_prefix="/usr/local"
-fi
-if [ -d "$_brew_prefix/opt/ruby/bin" ]; then
+# Set by `brew shellenv` in .zprofile (/opt/homebrew, /usr/local or /home/linuxbrew/.linuxbrew)
+_brew_prefix="${HOMEBREW_PREFIX:-$(brew --prefix 2>/dev/null)}"
+[ -d "$_brew_prefix/opt/libpq/bin" ] && export PATH="$_brew_prefix/opt/libpq/bin:$PATH"
+
+# Homebrew Ruby (ahead of the system Ruby) + its gem executables
+if [ -n "$_brew_prefix" ] && [ -d "$_brew_prefix/opt/ruby/bin" ]; then
   # Pick the newest gems dir so a Ruby upgrade doesn't need a manual edit
   _ruby_gem_bins=("$_brew_prefix"/lib/ruby/gems/*/bin(Nn))
   (( ${#_ruby_gem_bins} )) && export PATH="${_ruby_gem_bins[-1]}:$PATH"

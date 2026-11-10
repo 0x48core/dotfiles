@@ -9,7 +9,7 @@ dotfiles/
 ├── zsh/
 │   ├── .zshrc       # main shell config (oh-my-zsh + starship)
 │   ├── .zshenv      # env vars, PATH (sourced by all shells)
-│   └── .zprofile    # login shell config (brew, aliases)
+│   └── .zprofile    # login shell config (brew on macOS/Linux, aliases)
 ├── git/
 │   └── .gitconfig   # git identity, LFS, gh credential helper
 ├── nvim/
@@ -26,6 +26,17 @@ git clone https://github.com/0x48core/dotfiles ~/dotfiles
 cd ~/dotfiles
 ./install.sh
 ```
+
+### Windows (WSL2)
+
+Install Ubuntu on WSL2 and Docker Desktop, then from the Ubuntu terminal:
+
+```bash
+git clone https://github.com/0x48core/dotfiles ~/dotfiles
+~/dotfiles/scripts/setup-wsl.sh
+```
+
+See [docs/wsl.md](docs/wsl.md) for the Windows side (font, Docker integration, mkcert, gcloud).
 
 ## Secrets
 

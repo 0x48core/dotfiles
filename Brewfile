@@ -8,9 +8,11 @@ brew "yq"
 # Ruby (Jekyll)
 brew "ruby"
 
-# Containers
-cask "docker-desktop"
-cask "multipass"    # local Ubuntu VMs
+# Containers (on WSL, install Docker Desktop on Windows instead — see docs/wsl.md)
+if OS.mac?
+  cask "docker-desktop"
+  cask "multipass"  # local Ubuntu VMs
+end
 
 # Kubernetes
 brew "kubectl"
@@ -28,8 +30,8 @@ brew "ansible-lint"
 brew "doctl"        # DigitalOcean CLI
 brew "cloud-sql-proxy"
 
-# Google Cloud
-cask "google-cloud-sdk"
+# Google Cloud (cask is macOS-only; on WSL see docs/wsl.md)
+cask "google-cloud-sdk" if OS.mac?
 
 # Protobuf
 brew "bufbuild/buf/buf"
