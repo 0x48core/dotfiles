@@ -24,3 +24,6 @@ cask "google-cloud-sdk"
 # Protobuf
 brew "bufbuild/buf/buf"
 brew "grpcurl"
+
+# Security
+brew "trivy"        # vulnerability / misconfig scanner
