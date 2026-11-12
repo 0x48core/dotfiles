@@ -16,27 +16,31 @@ dotfiles/
 │   └── init.vim     # neovim config (vim-plug, gruvbox, coc.nvim)
 ├── config/
 │   └── starship.toml
-└── install.sh       # symlinks everything into place
+├── scripts/lib/platform.sh  # OS detection shared by the scripts
+└── install.sh       # bootstrap + symlinks (macOS, Linux, WSL)
 ```
 
 ## Install
 
+Works on macOS, Linux (apt, dnf or pacman) and Windows via WSL2:
+
 ```bash
 git clone https://github.com/0x48core/dotfiles ~/dotfiles
 cd ~/dotfiles
-./install.sh
+./install.sh                # prerequisites, Homebrew, Oh My Zsh, symlinks, Brewfile
+./install.sh --no-packages  # same, without `brew bundle`
+./install.sh --links        # symlinks only
 ```
 
-### Windows (WSL2)
+Existing files are moved to `<file>.bak.<timestamp>` before being linked. Rerunning is safe.
 
-Install Ubuntu on WSL2 and Docker Desktop, then from the Ubuntu terminal:
+| Platform | Notes |
+|---|---|
+| macOS | Installs Xcode Command Line Tools first if missing |
+| Linux | Run as your user (not root); see [docs/linux.md](docs/linux.md) for Docker and clipboard |
+| Windows | Run inside WSL2 Ubuntu; see [docs/wsl.md](docs/wsl.md) for the Windows side |
 
-```bash
-git clone https://github.com/0x48core/dotfiles ~/dotfiles
-~/dotfiles/scripts/setup-wsl.sh
-```
-
-See [docs/wsl.md](docs/wsl.md) for the Windows side (font, Docker integration, mkcert, gcloud).
+macOS-only Brewfile entries (`docker-desktop`, `multipass`, `google-cloud-sdk`) are skipped on Linux and WSL.
 
 ## Secrets
 
