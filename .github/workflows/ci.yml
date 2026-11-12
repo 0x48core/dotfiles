@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: shellcheck
+        run: shellcheck -x install.sh scripts/*.sh scripts/lib/platform.sh
+
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install zsh
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y zsh
+      - name: zsh syntax
+        run: for f in zsh/.zshrc zsh/.zshenv zsh/.zprofile; do zsh -n "$f"; done
+      - name: install.sh --no-packages
+        run: ./install.sh --no-packages
+      - name: Shell loads with linked config
+        run: zsh -lic 'echo "brew=$HOMEBREW_PREFIX"; alias vim'
+      - name: Brewfile resolves for this OS
+        run: brew bundle list --file=Brewfile --all

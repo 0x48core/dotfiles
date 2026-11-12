@@ -6,13 +6,15 @@
 ./scripts/setup-gcloud.sh [PROJECT_ID]
 ```
 
-Or manually:
+The script picks the installer for your OS. Or manually:
 
 ```bash
+# macOS
 brew install --cask google-cloud-sdk
+gcloud components install gke-gcloud-auth-plugin beta
 
-# Additional components
-gcloud components install gke-gcloud-auth-plugin kubectl beta
+# Linux / WSL (Debian, Ubuntu): Google's apt repo, see scripts/setup-gcloud.sh
+sudo apt-get install -y google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin
 ```
 
 ---
