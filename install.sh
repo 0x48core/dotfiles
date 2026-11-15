@@ -44,6 +44,9 @@ link_all() {
   # starship
   link "$DOTFILES/config/starship.toml" "$HOME/.config/starship.toml"
 
+  # ghostty
+  link "$DOTFILES/config/ghostty/config" "$HOME/.config/ghostty/config"
+
   # nvim
   link "$DOTFILES/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 }
@@ -93,15 +96,13 @@ install_homebrew() {
   eval "$("$(brew_bin)" shellenv)"
 }
 
-# Oh My Zsh + the zsh-autosuggestions plugin used in .zshrc
+# Oh My Zsh (zsh plugins come from the Brewfile)
 install_oh_my_zsh() {
   if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo "Installing Oh My Zsh..."
     RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
       sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
-  local plugin="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-  [ -d "$plugin" ] || git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions "$plugin"
 }
 
 install_packages() {

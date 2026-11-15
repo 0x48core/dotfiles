@@ -9,7 +9,7 @@ else
   ZSH_THEME="agnoster"
 fi
 
-plugins=(git zsh-autosuggestions)
+plugins=(git)
 
 # Load Oh My Zsh if installed
 if [ -f "$ZSH/oh-my-zsh.sh" ]; then
@@ -61,6 +61,18 @@ if command -v kubectl >/dev/null 2>&1; then
   (( $+functions[compdef] )) || { autoload -Uz compinit && compinit; }
   source <(kubectl completion zsh)
   compdef k=kubectl
+fi
+
+# fzf key bindings (Ctrl-R, Ctrl-T) and zoxide (`z`)
+command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+
+# zsh plugins from Homebrew; syntax-highlighting must be sourced last
+if [ -n "$HOMEBREW_PREFIX" ]; then
+  for _plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+    [ -f "$HOMEBREW_PREFIX/share/$_plugin/$_plugin.zsh" ] && source "$HOMEBREW_PREFIX/share/$_plugin/$_plugin.zsh"
+  done
+  unset _plugin
 fi
 
 # Initialize Starship if installed

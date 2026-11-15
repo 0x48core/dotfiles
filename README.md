@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal dotfiles for zsh, git, neovim, and starship.
+Personal dotfiles for zsh, git, neovim, starship, and Ghostty.
 
 ## Structure
 
@@ -15,7 +15,8 @@ dotfiles/
 ├── nvim/
 │   └── init.vim     # neovim config (vim-plug, gruvbox, coc.nvim)
 ├── config/
-│   └── starship.toml
+│   ├── starship.toml  # prompt (needs a Nerd Font; Ghostty bundles one)
+│   └── ghostty/config # terminal colors and font size
 ├── scripts/lib/platform.sh  # OS detection shared by the scripts
 └── install.sh       # bootstrap + symlinks (macOS, Linux, WSL)
 ```
@@ -40,7 +41,7 @@ Existing files are moved to `<file>.bak.<timestamp>` before being linked. Rerunn
 | Linux | Run as your user (not root); see [docs/linux.md](docs/linux.md) for Docker and clipboard |
 | Windows | Run inside WSL2 Ubuntu; see [docs/wsl.md](docs/wsl.md) for the Windows side |
 
-macOS-only Brewfile entries (`docker-desktop`, `multipass`, `google-cloud-sdk`) are skipped on Linux and WSL.
+macOS-only Brewfile entries (`ghostty`, `docker-desktop`, `multipass`, `google-cloud-sdk`) are skipped on Linux and WSL.
 
 ## Secrets
 
