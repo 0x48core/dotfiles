@@ -27,13 +27,14 @@ gem install bundler jekyll
 |------|------|-----------------|
 | Apple Silicon (`arm64`) | `/opt/homebrew/opt/ruby/bin` | `/opt/homebrew/lib/ruby/gems/<ver>/bin` |
 | Intel (`x86_64`) | `/usr/local/opt/ruby/bin` | `/usr/local/lib/ruby/gems/<ver>/bin` |
+| Linux / WSL | `/home/linuxbrew/.linuxbrew/opt/ruby/bin` | `/home/linuxbrew/.linuxbrew/lib/ruby/gems/<ver>/bin` |
 
 `<ver>` is detected automatically (newest dir under `lib/ruby/gems/`), so a Ruby upgrade needs no edit.
 
 ## Verify
 
 ```bash
-which ruby   # /opt/homebrew/opt/ruby/bin/ruby (or /usr/local/...)
+which ruby   # $HOMEBREW_PREFIX/opt/ruby/bin/ruby
 ruby -v      # 3.x, not 2.6
 jekyll -v
 ```

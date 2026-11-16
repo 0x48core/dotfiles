@@ -27,11 +27,11 @@ Clone into the Linux filesystem, **not** `/mnt/c/...` (cross-filesystem I/O is s
 ```bash
 git clone https://github.com/0x48core/dotfiles ~/dotfiles
 cd ~/dotfiles
-./scripts/setup-wsl.sh
+./install.sh
 exec zsh -l
 ```
 
-`setup-wsl.sh` installs the apt prerequisites, Homebrew (`/home/linuxbrew/.linuxbrew`), Oh My Zsh with `zsh-autosuggestions`, runs `install.sh` and `brew bundle`, then sets zsh as the default shell. It is safe to rerun.
+`install.sh` detects WSL and installs the apt prerequisites, Homebrew (`/home/linuxbrew/.linuxbrew`), Oh My Zsh with `zsh-autosuggestions`, links the dotfiles, runs `brew bundle`, then sets zsh as the default shell. It is safe to rerun.
 
 macOS-only Brewfile entries (`docker-desktop`, `multipass`, `google-cloud-sdk`) are skipped on Linux.
 
@@ -48,15 +48,7 @@ k3d version
 
 ### Google Cloud CLI
 
-The Homebrew cask is macOS-only. Use Google's apt repo:
-
-```bash
-sudo apt-get install -y apt-transport-https ca-certificates gnupg curl
-curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" \
-  | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
-sudo apt-get update && sudo apt-get install -y google-cloud-cli
-```
+The Homebrew cask is macOS-only. `./scripts/setup-gcloud.sh` installs from Google's apt repo instead (with `gke-gcloud-auth-plugin`).
 
 ### mkcert (trusted local HTTPS in Windows browsers)
 
@@ -85,8 +77,9 @@ Multipass is macOS-only in the Brewfile. On Windows, install it on the Windows s
 
 ### Clipboard and SSH
 
-`scripts/setup-ssh.sh` works as-is (`--apple-use-keychain` is skipped). Replace `pbcopy` with `clip.exe`:
+`scripts/setup-ssh.sh` works as-is (`--apple-use-keychain` is skipped). `.zshrc` maps `pbcopy` → `clip.exe`, `pbpaste` → PowerShell `Get-Clipboard` and `open` → `explorer.exe`, so macOS commands in the docs work unchanged:
 
 ```bash
-cat ~/.ssh/id_ed25519_github.pub | clip.exe
+cat ~/.ssh/id_ed25519_github.pub | pbcopy
+open .                             # opens the folder in Explorer
 ```

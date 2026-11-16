@@ -1,9 +1,15 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="agnoster"
+# Starship draws the prompt when installed; agnoster is only the fallback
+# (it also warns "character not in range" when en_US.UTF-8 isn't generated)
+if command -v starship >/dev/null 2>&1; then
+  ZSH_THEME=""
+else
+  ZSH_THEME="agnoster"
+fi
 
-plugins=(git zsh-autosuggestions)
+plugins=(git)
 
 # Load Oh My Zsh if installed
 if [ -f "$ZSH/oh-my-zsh.sh" ]; then
@@ -31,12 +37,42 @@ if [ -n "$_brew_prefix" ] && [ -d "$_brew_prefix/opt/ruby/bin" ]; then
 fi
 unset _brew_prefix _ruby_gem_bins
 
+# macOS-style open/pbcopy/pbpaste on Linux and WSL
+if [[ "$OSTYPE" == linux* ]]; then
+  if grep -qi microsoft /proc/version 2>/dev/null; then
+    alias open='explorer.exe'
+    alias pbcopy='clip.exe'
+    pbpaste() { powershell.exe -NoProfile -Command Get-Clipboard | tr -d '\r'; }
+  else
+    alias open='xdg-open'
+    if command -v wl-copy >/dev/null 2>&1; then
+      alias pbcopy='wl-copy'
+      alias pbpaste='wl-paste --no-newline'
+    elif command -v xclip >/dev/null 2>&1; then
+      alias pbcopy='xclip -selection clipboard'
+      alias pbpaste='xclip -selection clipboard -o'
+    fi
+  fi
+fi
+
 # Kubernetes
 if command -v kubectl >/dev/null 2>&1; then
   alias k='kubectl'
   (( $+functions[compdef] )) || { autoload -Uz compinit && compinit; }
   source <(kubectl completion zsh)
   compdef k=kubectl
+fi
+
+# fzf key bindings (Ctrl-R, Ctrl-T) and zoxide (`z`)
+command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+
+# zsh plugins from Homebrew; syntax-highlighting must be sourced last
+if [ -n "$HOMEBREW_PREFIX" ]; then
+  for _plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+    [ -f "$HOMEBREW_PREFIX/share/$_plugin/$_plugin.zsh" ] && source "$HOMEBREW_PREFIX/share/$_plugin/$_plugin.zsh"
+  done
+  unset _plugin
 fi
 
 # Initialize Starship if installed

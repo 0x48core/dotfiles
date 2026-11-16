@@ -111,11 +111,14 @@ Add to `~/.ssh/config` once:
 
 ```
 Host *
+  IgnoreUnknown UseKeychain
   AddKeysToAgent yes
   UseKeychain yes
 ```
 
-Keys added with `--apple-use-keychain` survive restarts without needing `ssh-add` again.
+Keys added with `--apple-use-keychain` survive restarts without needing `ssh-add` again. `IgnoreUnknown` keeps the same `~/.ssh/config` valid on Linux/WSL, whose OpenSSH has no `UseKeychain` option.
+
+On Linux/WSL, `AddKeysToAgent yes` loads the key on first use; start an agent per login with [keychain](https://www.funtoo.org/Funtoo:Keychain) or your desktop's agent.
 
 ---
 

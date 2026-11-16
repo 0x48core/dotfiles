@@ -66,7 +66,7 @@ git config --global user.email "yourmail@example.com"
 git config --global init.defaultBranch main
 
 # Credential helper (via gh)
-git config --global credential.helper "!/opt/homebrew/bin/gh auth git-credential"
+git config --global credential.helper "!gh auth git-credential"
 ```
 
 ---

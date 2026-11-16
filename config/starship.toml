@@ -1,62 +1,23 @@
-add_newline = false
+add_newline = true
 
-# =========================
-# MAIN PROMPT LAYOUT
-# =========================
 format = """
-$aws\
-$docker_context\
+[\ue0b6](fg:#dea0d1)\
+[ \u2721 ](bg:#dea0d1 fg:#282a36)\
+[\ue0b0](fg:#dea0d1 bg:#fafeba)\
 $directory\
 $git_branch\
-$git_status\
-$cmd_duration\
-$line_break\
-$character
-"""
+[\ue0b0](fg:#fafeba)\
+$character"""
 
-# =========================
-# DIRECTORY (WORK CONTEXT)
-# =========================
 [directory]
-style = "bold #89b4fa"
-truncate_to_repo = true
+format = "[ $path ](bg:#fafeba fg:#282a36)"
 truncation_length = 2
+truncate_to_repo = false
+home_symbol = "~"
 
-# =========================
-# GIT (CODE HEALTH SIGNAL)
-# =========================
 [git_branch]
-symbol = " "
-style = "bold #cba6f7"
+format = "[\ue0a0 $branch ](bg:#fafeba fg:#282a36)"
 
-[git_status]
-style = "bold #f38ba8"
-
-# =========================
-# CMD DURATION (DEBUG ONLY)
-# =========================
-[cmd_duration]
-min_time = 800
-format = "⏱ [$duration](bold #fab387) "
-
-# =========================
-# PROMPT SYMBOL (OPS STYLE)
-# =========================
 [character]
-success_symbol = "[❯](bold #a6e3a1)"
-error_symbol = "[❯](bold #f38ba8)"
-
-# =========================
-# CLOUD (AWS STYLE OPS)
-# =========================
-[aws]
-format = '☁️ [$profile](bold #f9e2af) '
-style = "bold #f9e2af"
-
-# =========================
-# DOCKER (CONTAINER SIGNAL)
-# =========================
-[docker_context]
-symbol = "🐳 "
-style = "bold #74c7ec"
-format = "[$symbol$context]($style) "
+success_symbol = " "
+error_symbol = "[✗](red) "

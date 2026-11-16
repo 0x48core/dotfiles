@@ -1,9 +1,20 @@
 brew "libpq"
 brew "starship"
+cask "ghostty" if OS.mac?  # terminal; config in config/ghostty
 brew "neovim"
 brew "gh"
 brew "jq"
 brew "yq"
+
+# Shell & CLI
+brew "zsh-autosuggestions"      # loaded in .zshrc
+brew "zsh-syntax-highlighting"  # loaded in .zshrc
+brew "fzf"
+brew "eza"          # ls replacement
+brew "bat"          # cat with syntax highlighting
+brew "zoxide"       # smarter cd (z)
+brew "btop"
+brew "lazydocker"
 
 # Ruby (Jekyll)
 brew "ruby"
@@ -21,6 +32,8 @@ brew "kind"
 brew "k3d"          # k3s in Docker
 brew "helm"
 brew "k9s"
+brew "kubectx"      # kubectx / kubens
+brew "stern"        # multi-pod log tailing
 brew "argocd"
 
 # Infrastructure
