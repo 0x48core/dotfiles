@@ -31,4 +31,5 @@ jobs:
       - name: Shell loads with linked config
         run: zsh -lic 'echo "brew=$HOMEBREW_PREFIX"; alias vim'
       - name: Brewfile resolves for this OS
-        run: brew bundle list --file=Brewfile --all
+        # Login shell so .zprofile puts brew on PATH (Linux runners don't)
+        run: zsh -lc 'brew bundle list --file=Brewfile --all'
